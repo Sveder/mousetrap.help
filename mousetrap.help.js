@@ -23,10 +23,11 @@ Mousetrap = (function(Mousetrap) {
     /* Constants */
     
     /**
-     * Original Moustrap object to pass the "overloaded" functions to.
+     * Original Moustrap functions to pass the "overloaded" functions to.
     */
-    var _mousetrap = Mousetrap,
-    _lol = Mousetrap.bind,
+    var _mousetrap_bind = Mousetrap.bind,
+        _mousetrap_unbind = Mousetrap.unbind,
+        _mousetrap_reset = Mousetrap.reset,
     
     /*
      * CSS style for the help overlay. Look at the unminified_help.css file
@@ -98,9 +99,7 @@ Mousetrap = (function(Mousetrap) {
         //Add all the mappings with their respective class:
         for (var charSeq in _help_map)
         {
-            //Get only the char sequence part of the charSeq:condition tuple. slice and this cluncky
-            //construct are used to make sure that a sequence containing : also works fine (split is weird):
-            var shortcut = charSeq.slice(0, charSeq.lastIndexOf(":"));
+            var shortcut = charSeq;
             if (shortcut === "?")
             {
                 continue;
@@ -184,40 +183,46 @@ Mousetrap = (function(Mousetrap) {
         
         //Figure out help text - either the parameter or the bound function name:
         helpText = helpText || callback.name;
-        _help_map[keys + ':' + action] = helpText;
         
-        return _lol(keys, callback, action);
+        //This is a stupid hack I need because Mousetrap.js uses this. in unbind
+        //and as I redefine it here this. becomes the global window object. This means
+        //I basically can't redefine unbind and just check that the bind in unbind is called.
+        //https://github.com/ccampbell/mousetrap/issues/84 - ARGH!
+        if (callback.toString() === (function() {}).toString())
+        {
+            if (_help_map[keys])
+            {
+                delete _help_map[keys];
+            }
+        }
+        else
+        {
+            _help_map[keys] = helpText;
+        }
+        
+        return _mousetrap_bind(keys, callback, action);
     };
 
     
-    Mousetrap.unbind = function(keys, action) {
-        if (_help_map[keys + ':' + action]) {
-            delete _help_map[keys + ':' + action];
-        }
-        
-        return _mousetrap.unbind(keys, action);
-    };
-    
-    
     Mousetrap.reset = function()
     {
-        _mousetrap.reset();
+        _mousetrap_reset();
         _help_map = {};
-        _mousetrap.bind('?', _toggleHelp);;
+        Mousetrap.bind('?', _toggleHelp);;
     };
     
     /**
-     * Show the help lighbox (overlay).
+     * Show the help lightbox (overlay).
      */
     Mousetrap.showHelp = _showHelp;
     
     /**
-     * Hide the help lighbox (overlay).
+     * Hide the help lightbox (overlay).
      */
     Mousetrap.hideHelp = _hideHelp;
     
     /**
-     * Toggle the visibility of the help lighbox (overlay).
+     * Toggle the visibility of the help lightbox (overlay).
      */
     Mousetrap.toggleHelp = _toggleHelp;
     

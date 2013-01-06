@@ -9,14 +9,14 @@
             }
         </style>
         
+        <script src="jquery-1.7.2.min.js"></script>
+        <script src="mousetrap.js"></script>
+        <script src="../mousetrap.help.js"></script>
+        
     </head>
 
     
 <body>
-    <script src="jquery-1.7.2.min.js"></script>
-    <script src="mousetrap.js"></script>
-    <script src="../mousetrap.help.js"></script>
-        
     <script>
 
 
@@ -24,7 +24,7 @@
         $(document).ready(function() {
             console.log("Started.");
         // single keys
-        Mousetrap.bind('4', function() { console.log('4'); }, undefined, "Help text goes here!");
+        Mousetrap.bind('4', function() { console.log('4'); }, "Help text goes here!");
         Mousetrap.bind('esc', function() { console.log('escape'); }, 'keyup', "This text will be shown when ? is pressed.");
 
         // combinations
