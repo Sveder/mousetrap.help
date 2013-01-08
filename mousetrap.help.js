@@ -1,5 +1,5 @@
 /**
- * Copyright 2012 Craig Campbell
+ * Copyright 2012 Michael Sverdlin (github.com/Sveder)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,12 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Mousetrap is a simple keyboard shortcut library for Javascript with
- * no external dependencies
+ * Mousetrap.help.js is an extension to the Mousetrap.js library that automatically
+ * generates and shows a lightbox overlay with help text for the bound keys.
  *
  * @version 1.2.2
- * @url craig.is/killing/mice
+ * @url https://github.com/Sveder/mousetrap.help
  */
+
 Mousetrap = (function(Mousetrap) {
     /* Constants */
     
@@ -65,6 +66,15 @@ Mousetrap = (function(Mousetrap) {
     
     
     /**
+     * Setup the help keybinding - ? to show and hide help and escape to hide it.
+     */
+    function _setupHelpBindings()
+    {
+        Mousetrap.bind('?', _toggleHelp, "Show or hide this help overlay.");
+        Mousetrap.bind('esc', _hideHelp, "Hide this help overlay if it is showing.");
+    }
+    
+    /**
      * Ensure that the help CSS was actually added to the dom. It should only be added once.
      * It also has to be right after the head element.
      */
@@ -100,10 +110,6 @@ Mousetrap = (function(Mousetrap) {
         for (var charSeq in _help_map)
         {
             var shortcut = charSeq;
-            if (shortcut === "?")
-            {
-                continue;
-            }
             
             //Change spaces to " then " like gmail does for sequences:
             shortcut = shortcut.replace(/ /g, "</span> then <span class='mousetrap_key'>");
@@ -206,9 +212,10 @@ Mousetrap = (function(Mousetrap) {
     
     Mousetrap.reset = function()
     {
-        _mousetrap_reset();
+        var ret = _mousetrap_reset();
         _help_map = {};
-        Mousetrap.bind('?', _toggleHelp);;
+        _setupHelpBindings();
+        return ret;
     };
     
     /**
@@ -228,7 +235,7 @@ Mousetrap = (function(Mousetrap) {
     
 
     //Add the help lightbox shortcut:
-    Mousetrap.bind('?', _toggleHelp);
+    _setupHelpBindings();
 
     return Mousetrap;
 
