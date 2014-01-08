@@ -12,7 +12,6 @@
   z-index:1002;
   overflow:auto;
   color:#FFF;
-  display:table;
   padding:25px;
 }
 
@@ -29,23 +28,17 @@
   margin:7px;
 }
 
-#mousetrap_table > div
+#mousetrap_table td
 {
-  display:table-row;
-}
-
-#mousetrap_table > div > div
-{
-  display:table-cell;
   padding:2px 4px;
 }
 
-#mousetrap_table > div > div:nth-child(1)
+#mousetrap_table .mousetrap_sequence
 {
   width:50%;
 }
 
-#mousetrap_table > div > div:nth-child(3)
+#mousetrap_table .mousetrap_explanation
 {
   width:47%;
 }
