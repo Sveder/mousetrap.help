@@ -20,7 +20,7 @@
  * @url https://github.com/Sveder/mousetrap.help
  */
 
-Mousetrap = (function(Mousetrap) {
+window.Mousetrap = (function(Mousetrap) {
     /* Constants */
     
     /**
@@ -248,4 +248,4 @@ Mousetrap = (function(Mousetrap) {
 
     return Mousetrap;
 
-}) (Mousetrap);
+})(window.Mousetrap);
