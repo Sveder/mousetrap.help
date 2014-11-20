@@ -20,7 +20,7 @@
  * @url https://github.com/Sveder/mousetrap.help
  */
 
-Mousetrap = (function(Mousetrap) {
+window.Mousetrap = (function(Mousetrap) {
     /* Constants */
     
     /**
@@ -36,7 +36,7 @@ Mousetrap = (function(Mousetrap) {
      *
      * @type {string}
     */
-    _DEFAULT_CSS_HELP_STYLE = ".mousetrap_lightbox{font-family:arial,sans-serif;position:fixed;top:10%;left:15%;width:65%;height:65%;border-radius:10px;background-color:#222;opacity:0.85;z-index:1002;overflow:auto;color:#FFF;display:table;padding:25px;}#mousetrap_title{margin-left:20px;padding-bottom:10px;font-size:1.17em;font-weight:700;}#mousetrap_table{margin:7px;}#mousetrap_table > div{display:table-row;}#mousetrap_table > div > div{display:table-cell;padding:2px 4px;}#mousetrap_table > div > div:nth-child(1){width:50%;}#mousetrap_table > div > div:nth-child(3){width:47%;}.mousetrap_key{font-family:'courier new', monospace;font-size:120%;color:#FF0;}.mousetrap_sequence{text-align:right;}",
+    _DEFAULT_CSS_HELP_STYLE = ".mousetrap_lightbox{font-family:arial,sans-serif;position:fixed;top:10%;left:15%;width:65%;height:65%;border-radius:10px;background-color:#222;opacity:.85;z-index:1002;overflow:auto;color:#FFF;padding:25px}#mousetrap_title{margin-left:20px;padding-bottom:10px;font-size:1.17em;font-weight:700}#mousetrap_table{margin:7px}#mousetrap_table td{padding:2px 4px}#mousetrap_table .mousetrap_sequence{width:50%}#mousetrap_table .mousetrap_explanation{width:47%}.mousetrap_key{font-family:'courier new',monospace;font-size:120%;color:#FF0}.mousetrap_sequence{text-align:right}",
         
         
     /* Private Variables */
@@ -89,8 +89,17 @@ Mousetrap = (function(Mousetrap) {
         //Add the style element to just after the head so that other style declaration
         //or linked CSS can override it:
         var styleElement = document.createElement("style");
-        styleElement.innerHTML = _DEFAULT_CSS_HELP_STYLE ;
-        document.head.insertBefore(styleElement, document.head.firstChild);
+        styleElement.type = "text/css";
+        var head = document.getElementsByTagName("head")[0];
+        if (styleElement.styleSheet)
+        {
+            styleElement.styleSheet.cssText = _DEFAULT_CSS_HELP_STYLE;
+        }
+        else
+        {
+            styleElement.appendChild(document.createTextNode(_DEFAULT_CSS_HELP_STYLE));
+        }
+        head.appendChild(styleElement);
         _help_css_was_added = true;
     }
     
@@ -104,7 +113,7 @@ Mousetrap = (function(Mousetrap) {
         
         //Start the lighbox HTML showing title and starting the div table to make it look pretty:
         mappingHtml = "<div class='mousetrap_lightbox'><span id='mousetrap_title'>Keyboard Shortcuts</span>";
-        mappingHtml += "<div id='mousetrap_table'>";
+        mappingHtml += "<table id='mousetrap_table'>";
         
         //Add all the mappings with their respective class:
         for (var charSeq in _help_map)
@@ -116,16 +125,16 @@ Mousetrap = (function(Mousetrap) {
             shortcut = shortcut.replace(/\+/g, "</span> + <span class='mousetrap_key'>");
             shortcut = shortcut.replace(/,/g, "</span> , <span class='mousetrap_key'>");
             
-            var seqHTML = "<div><div class='mousetrap_sequence'><span class='mousetrap_key'>";
+            var seqHTML = "<tr><td class='mousetrap_sequence'><span class='mousetrap_key'>";
             seqHTML += shortcut;
-            seqHTML += "</span></div><div>:</div>";
+            seqHTML += "</span></td><td>:</td>";
             
             var helpText = _help_map[charSeq];
             
-            mappingHtml += seqHTML + "<div class='mousetrap_explanation'>" + helpText + "</div></div>";
+            mappingHtml += seqHTML + "<td class='mousetrap_explanation'>" + helpText + "</td></tr>";
         }
         
-        mappingHtml += '</div>';
+        mappingHtml += '</table>';
         _help_div = document.createElement("div");
         _help_div.innerHTML = mappingHtml;
         document.getElementsByTagName('body')[0].appendChild(_help_div);
@@ -239,4 +248,4 @@ Mousetrap = (function(Mousetrap) {
 
     return Mousetrap;
 
-}) (Mousetrap);
+})(window.Mousetrap);
