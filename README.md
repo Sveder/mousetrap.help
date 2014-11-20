@@ -57,9 +57,7 @@ Maybe in the future we'll add more styling and provide other styles that look li
 
 
 ## Development
-Feel free to report bugs and add features and suggestions. You can see future features here:
-https://trello.com/board/moustrap/50de15440b4c796603000095
-
+Feel free to report bugs and add features and suggestions either through github issues or by email to m@sveder.com.
 
 
 ## Additional Credits

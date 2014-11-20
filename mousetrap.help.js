@@ -58,7 +58,7 @@ window.Mousetrap = (function(Mousetrap) {
     
     /**
      * Whether the help CSS was added to the DOM already. This should only happen once and only
-     * if the help is ever actualy used so to not to pollute the DOM.
+     * if the help is ever actually used so to not to pollute the DOM.
      *
      * @type {Boolean}
      */
