@@ -53,11 +53,14 @@ The basic overlay is the simplest lightbox code made to look as close to gmail's
 
 ``.mousetrap_sequence`` - the whole sequence including the key, "then", "+" and ","
 
-Maybe in the future we'll add more styling and provide other styles that look like other site's help page.
+Maybe in the future we'll add more styling options and provide other styles as an example.
 
 
 ## Development
 Feel free to report bugs and add features and suggestions either through github issues or by email to m@sveder.com.
+
+## License
+Mousetrap.help is licensed under the [apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0.html).
 
 
 ## Additional Credits
