@@ -53,7 +53,7 @@ function set_up(details)
 {
     Mousetrap.reset();
     Mousetrap.hideHelp();
-    ok(!is_help_showing(), "Help is showing after hiding it in set_up!");
+    ok(!is_help_showing(), "Help is not showing after hiding it in set_up!");
 }
 QUnit.testStart(set_up);
 
@@ -73,14 +73,14 @@ test( "Test showHelp", function() {
 
 /**
  * Test: Test that hideHelp works.
- * Expected Result: When hideHelp is called the overlay is .
+ * Expected Result: When hideHelp is called the overlay is hidden.
  */
 test( "Test hideHelp", function() {
     Mousetrap.showHelp();
     ok(is_help_showing(), "Test started showing the overlay.");
 
     Mousetrap.hideHelp();
-    ok(!is_help_showing(), "Help is hidden after calling hideHelp.");    
+    ok(!is_help_showing(), "Help is hidden after calling hideHelp.");
 });
 
 
@@ -95,4 +95,32 @@ test( "Test toggleHelp", function() {
 
     Mousetrap.toggleHelp();
     ok(!is_help_showing(), "Help is hidden after calling toggleHelp again.");
+});
+
+
+/**
+ * Test: Test that the keyboard bindings I add for help bring up and remove the help screen.
+ * Expected Result: ? (shift + /) toggles the overlay, escape just closes it.
+ */
+test( "Test key bindings", function() {
+    //Test ? (shift + /):
+    ok(!is_help_showing(), "Test started without showing the overlay.");
+
+    KeyEvent.simulate('?'.charCodeAt(0), 0, ['shift']);
+    ok(is_help_showing(), "Help is showing after pressing ?.");
+
+    KeyEvent.simulate('?'.charCodeAt(0), 0, ['shift']);
+    ok(!is_help_showing(), "Help is hidden after pressing ? again.");
+
+    //Test escape:
+    ok(!is_help_showing(), "Test started without showing the overlay.");
+
+    KeyEvent.simulate(0, 27);
+    ok(!is_help_showing(), "Overlay still hidden after pressing escape.");
+
+    Mousetrap.showHelp();
+    ok(is_help_showing(), "Help is showing after calling showHelp.");
+
+    KeyEvent.simulate(0, 27);
+    ok(!is_help_showing(), "Help is hidden after pressing escape.");
 });

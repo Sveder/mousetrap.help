@@ -12,6 +12,7 @@
         <script src="http://cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.js"></script>
         <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/blanket.js/1.1.4/blanket.min.js"></script>
 
+        <script src="key_press.js" data-cover></script>
         <script src="../mousetrap.help.js" data-cover></script>
         <script src="test.mousetrap.help.js"></script>
     </head>
@@ -19,5 +20,7 @@
     
     <body>
       <div id="qunit"></div>
+      <b>Note: Running with coverage won't work with the file:// protocol because blanket.js tries to do ajax
+      "cross domain" requests. <a href="https://github.com/alex-seville/blanket/blob/master/docs/special_features.md#local-uploader">Follow these workarounds.</a></b>
     </body>
 </html>
