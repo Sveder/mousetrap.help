@@ -185,7 +185,7 @@ window.Mousetrap = (function(Mousetrap) {
      * @param {Function} callback
      * @param {string=} action - 'keypress', 'keydown', or 'keyup'. If not action than
      * it will be used as helpText.
-     * @param (string) helpText The help text to show in the help lightbox.
+     * @param {string} helpText The help text to show in the help lightbox.
      * @returns void
      */
     Mousetrap.bind = function(keys, callback, action, helpText) {
