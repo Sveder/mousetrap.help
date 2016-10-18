@@ -36,7 +36,7 @@ window.Mousetrap = (function(Mousetrap) {
      *
      * @type {string}
     **/
-    var _DEFAULT_CSS_HELP_STYLE = ".mousetrap_lightbox{font-family:arial,sans-serif;position:fixed;top:10%;left:15%;width:65%;height:65%;border-radius:10px;background-color:#222;opacity:.85;z-index:1002;overflow:auto;color:#FFF;padding:25px}#mousetrap_title{margin-left:20px;padding-bottom:10px;font-size:1.17em;font-weight:700}#mousetrap_table{margin:7px}#mousetrap_table td{padding:2px 4px}#mousetrap_table .mousetrap_sequence{width:50%}#mousetrap_table .mousetrap_explanation{width:47%}.mousetrap_key{font-family:'courier new',monospace;font-size:120%;color:#FF0}.mousetrap_sequence{text-align:right}",
+    var _DEFAULT_CSS_HELP_STYLE = ".mousetrap_lightbox{font-family:arial,sans-serif;position:fixed;top:10%;left:15%;width:65%;height:65%;border-radius:10px;background-color:#222;opacity:.85;z-index:1002;overflow:auto;color:#FFF;padding:25px}#mousetrap_title{margin-left:20px;padding-bottom:10px;font-size:1.17em;font-weight:700}#mousetrap_table{margin:7px}#mousetrap_table td{padding:2px 4px}#mousetrap_table .mousetrap_sequence{width:50%}#mousetrap_table .mousetrap_explanation{width:47%}.mousetrap_key{font-family:'courier new',monospace;font-size:120%;color:#FF0}.mousetrap_sequence{text-align:right}";
         
         
     /* Private Variables */
@@ -46,7 +46,7 @@ window.Mousetrap = (function(Mousetrap) {
      *
      * @type {Object}
      **/
-    _help_map = {},
+    var _help_map = {};
     
     /**
      * The shortcut help div that should be added and removed as we want
@@ -54,7 +54,7 @@ window.Mousetrap = (function(Mousetrap) {
      *
      * @type {Node|null}
      */
-    _help_div,
+    var _help_div;
     
     /**
      * Whether the help CSS was added to the DOM already. This should only happen once and only
@@ -62,7 +62,7 @@ window.Mousetrap = (function(Mousetrap) {
      *
      * @type {boolean}
      */
-    _help_css_was_added = false;
+    var _help_css_was_added = false;
     
     
     /**
