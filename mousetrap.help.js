@@ -30,12 +30,12 @@ window.Mousetrap = (function(Mousetrap) {
     var _mousetrap_unbind = Mousetrap.unbind;
     var _mousetrap_reset = Mousetrap.reset;
     
-    /*
+    /**
      * CSS style for the help overlay. Look at the unminified_help.css file
      * for the unminified version.
      *
      * @type {string}
-    */
+    **/
     var _DEFAULT_CSS_HELP_STYLE = ".mousetrap_lightbox{font-family:arial,sans-serif;position:fixed;top:10%;left:15%;width:65%;height:65%;border-radius:10px;background-color:#222;opacity:.85;z-index:1002;overflow:auto;color:#FFF;padding:25px}#mousetrap_title{margin-left:20px;padding-bottom:10px;font-size:1.17em;font-weight:700}#mousetrap_table{margin:7px}#mousetrap_table td{padding:2px 4px}#mousetrap_table .mousetrap_sequence{width:50%}#mousetrap_table .mousetrap_explanation{width:47%}.mousetrap_key{font-family:'courier new',monospace;font-size:120%;color:#FF0}.mousetrap_sequence{text-align:right}",
         
         
@@ -187,7 +187,7 @@ window.Mousetrap = (function(Mousetrap) {
      * not one of those, then helpText will be overriden with the value of
      * action.
      * @param {string=} helpText The help text to show in the help lightbox.
-     * @returns void
+     * @returns {void}
      */
     Mousetrap.bind = function(keys, callback, action, helpText) {
         // if the third variable is not one of the allowed action values use that for help text
