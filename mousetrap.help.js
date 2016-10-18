@@ -26,9 +26,9 @@ window.Mousetrap = (function(Mousetrap) {
     /**
      * Original Moustrap functions to pass the "overloaded" functions to.
     */
-    var _mousetrap_bind = Mousetrap.bind,
-        _mousetrap_unbind = Mousetrap.unbind,
-        _mousetrap_reset = Mousetrap.reset,
+    var _mousetrap_bind = Mousetrap.bind;
+    var _mousetrap_unbind = Mousetrap.unbind;
+    var _mousetrap_reset = Mousetrap.reset;
     
     /*
      * CSS style for the help overlay. Look at the unminified_help.css file
@@ -36,7 +36,7 @@ window.Mousetrap = (function(Mousetrap) {
      *
      * @type {string}
     */
-    _DEFAULT_CSS_HELP_STYLE = ".mousetrap_lightbox{font-family:arial,sans-serif;position:fixed;top:10%;left:15%;width:65%;height:65%;border-radius:10px;background-color:#222;opacity:.85;z-index:1002;overflow:auto;color:#FFF;padding:25px}#mousetrap_title{margin-left:20px;padding-bottom:10px;font-size:1.17em;font-weight:700}#mousetrap_table{margin:7px}#mousetrap_table td{padding:2px 4px}#mousetrap_table .mousetrap_sequence{width:50%}#mousetrap_table .mousetrap_explanation{width:47%}.mousetrap_key{font-family:'courier new',monospace;font-size:120%;color:#FF0}.mousetrap_sequence{text-align:right}",
+    var _DEFAULT_CSS_HELP_STYLE = ".mousetrap_lightbox{font-family:arial,sans-serif;position:fixed;top:10%;left:15%;width:65%;height:65%;border-radius:10px;background-color:#222;opacity:.85;z-index:1002;overflow:auto;color:#FFF;padding:25px}#mousetrap_title{margin-left:20px;padding-bottom:10px;font-size:1.17em;font-weight:700}#mousetrap_table{margin:7px}#mousetrap_table td{padding:2px 4px}#mousetrap_table .mousetrap_sequence{width:50%}#mousetrap_table .mousetrap_explanation{width:47%}.mousetrap_key{font-family:'courier new',monospace;font-size:120%;color:#FF0}.mousetrap_sequence{text-align:right}",
         
         
     /* Private Variables */
@@ -52,7 +52,7 @@ window.Mousetrap = (function(Mousetrap) {
      * The shortcut help div that should be added and removed as we want
      * to show or hide the help.
      *
-     * @type {Object}
+     * @type {Node|null}
      */
     _help_div,
     
@@ -60,7 +60,7 @@ window.Mousetrap = (function(Mousetrap) {
      * Whether the help CSS was added to the DOM already. This should only happen once and only
      * if the help is ever actually used so to not to pollute the DOM.
      *
-     * @type {Boolean}
+     * @type {boolean}
      */
     _help_css_was_added = false;
     
@@ -183,9 +183,10 @@ window.Mousetrap = (function(Mousetrap) {
      *
      * @param {string|Array} keys
      * @param {Function} callback
-     * @param {string=} action - 'keypress', 'keydown', or 'keyup'. If not action than
-     * it will be used as helpText.
-     * @param {string} helpText The help text to show in the help lightbox.
+     * @param {string=} action - 'keypress', 'keydown', or 'keyup'. If action is
+     * not one of those, then helpText will be overriden with the value of
+     * action.
+     * @param {string=} helpText The help text to show in the help lightbox.
      * @returns void
      */
     Mousetrap.bind = function(keys, callback, action, helpText) {
