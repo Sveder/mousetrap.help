@@ -65,3 +65,5 @@ Mousetrap.help is licensed under the [apache 2.0 license](http://www.apache.org/
 @ccampbell for the [mousetrap.js](https://github.com/ccampbell/mousetrap "mousetrap.js") library. 
 
 @ecgan for a lot of help, getting me on the right track and suggestions.
+
+@jmhodges for great pull requests.
